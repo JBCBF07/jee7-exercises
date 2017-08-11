@@ -15,6 +15,14 @@ public class Candy {
     @Enumerated(EnumType.STRING)
     private CandyColor color;
 
+    public Candy() {}
+
+    public Candy(String name, double price, CandyColor color) {
+        this.name = name;
+        this.price = price;
+        this.color = color;
+    }
+
     public Long getId() {
         return id;
     }

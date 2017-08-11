@@ -37,6 +37,8 @@ public class Person {
     private List<CandyColor> candyPreferences = new ArrayList<>();
 
     // TODO: add the inverse of the many-to-one relationship between Order and Person named "orderHistory"
+    @OneToMany(mappedBy = "person")
+    private List<Order> orderHistory;
 
     @PostLoad
     public void initializeAge() {
@@ -90,5 +92,21 @@ public class Person {
 
     public void setCandyPreferences(List<CandyColor> candyPreferences) {
         this.candyPreferences = candyPreferences;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAge(long age) {
+        this.age = age;
+    }
+
+    public List<Order> getOrderHistory() {
+        return orderHistory;
+    }
+
+    public void setOrderHistory(List<Order> orderHistory) {
+        this.orderHistory = orderHistory;
     }
 }

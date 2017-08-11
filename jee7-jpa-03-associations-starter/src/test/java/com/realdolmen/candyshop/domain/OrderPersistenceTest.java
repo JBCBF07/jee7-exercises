@@ -4,6 +4,7 @@ import com.realdolmen.candyshop.AbstractPersistenceTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -53,13 +54,45 @@ public class OrderPersistenceTest extends AbstractPersistenceTest {
 
     @Test
     public void orderCanAddOrderLine() throws Exception {
-        // TODO: implement this test
-        Assert.fail("TODO");
+        Order o = em.find(Order.class, 3000L);
+        int beginLines = o.getOrderLines().size();
+        o.getOrderLines().add(new OrderLine());
+
+        em.persist(o);
+
+        Order p = em.find(Order.class, o.getId());
+        assertEquals(p.getOrderLines().size(), beginLines + 1 );
     }
 
     @Test
     public void orderCanCalculateTotalPrice() throws Exception {
-        // TODO: implement this test
-        Assert.fail("TODO");
+        Order o = new Order();
+
+        o.setOrderLines(
+                Arrays.asList(
+                        new OrderLine(
+                                2,
+                                new Candy(
+                                        "a",
+                                        5,
+                                        CandyColor.BLUE
+                                )
+                        ),
+                        new OrderLine(
+                                2,
+                                new Candy(
+                                        "b",
+                                        5,
+                                        CandyColor.RED
+                                )
+                        )
+                )
+        );
+
+        double total = o.calculateTotal();
+
+        assertEquals(20, total, 0);
+
+
     }
 }
