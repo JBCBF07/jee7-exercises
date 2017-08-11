@@ -36,6 +36,7 @@ public class Person {
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "candy_preferences")
     @Column(name = "candy_color")
+    @Enumerated(EnumType.STRING)
     private List<CandyColor> candyPreferences; 
     
     @PostLoad

@@ -9,7 +9,8 @@ import javax.persistence.*;
 public class Candy {
 
     // TODO: add properties id (Long, pk), name (String), price (double)
-	@Id @GeneratedValue private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String name;
 	private double price;
 	@Enumerated(EnumType.STRING)
