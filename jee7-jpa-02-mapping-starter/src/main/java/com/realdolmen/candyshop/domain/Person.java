@@ -13,22 +13,34 @@ public class Person {
     private Long id;
 
     // TODO: make non nullable and restrict to 200 characters
+    @Column(nullable = false, length = 200)
     private String firstName;
 
     // TODO: make non nullable and restrict to 200 characters
+    @Column(nullable = false, length = 200)
     private String lastName;
 
     // TODO: add property birthdate (store only date portion) make it non nullable
+    @Temporal(TemporalType.DATE)
+    private Date birthDate;
 
     // TODO: add property age (not stored in database, but calculated from birthdate
+    @Transient
+    private int age;
 
     // TODO: add embedded mapping to address
+    @Embedded
+    private Address address;
 
     // TODO: add element collection (table name "candy_preferences", columns ("candy_color" and "person_id")
-
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "candy_preferences")
+    @Column(name = "candy_color")
+    private List<CandyColor> candyPreferences; 
+    
     @PostLoad
     public void initializeAge() {
-        this.age = DateUtils.yearsFrom(birthDate);
+        this.age = (int) DateUtils.yearsFrom(birthDate);
     }
 
     public Long getId() {
@@ -50,4 +62,34 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<CandyColor> getCandyPreferences() {
+		return candyPreferences;
+	}
+
+	public void setCandyPreferences(List<CandyColor> candyPreferences) {
+		this.candyPreferences = candyPreferences;
+	}
+
+	public int getAge() {
+		return age;
+	}
+    
+    
 }
