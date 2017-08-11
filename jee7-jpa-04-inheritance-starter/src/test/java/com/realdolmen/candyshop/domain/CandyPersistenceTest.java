@@ -20,6 +20,7 @@ public class CandyPersistenceTest extends AbstractPersistenceTest {
     @Test
     public void candyCanBeLoaded() throws Exception {
         Candy c = em.find(Candy.class, 1000L);
+        System.out.println(c.getName());
         assertEquals(CandyColor.RED, c.getColor());
     }
 

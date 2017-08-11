@@ -91,7 +91,7 @@ public class OrderPersistenceTest extends AbstractPersistenceTest {
 
         double total = o.calculateTotal();
 
-        assertEquals(20, total, 0);
+        assertEquals(20, total, 0.01);
 
 
     }

@@ -3,10 +3,11 @@ package com.realdolmen.candyshop.domain;
 import javax.persistence.*;
 
 @Entity
-// TODO: make abstract
+@Inheritance (strategy = InheritanceType.JOINED)
+@DiscriminatorColumn (name = "candy_type", discriminatorType = DiscriminatorType.STRING)
 // TODO: use inheritance strategy and set discriminator column name
 // TODO: subclass from Tracked
-public class Candy {
+public abstract class Candy extends Tracked {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
