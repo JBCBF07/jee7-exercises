@@ -2,6 +2,7 @@ package com.realdolmen.candyshop.domain;
 
 import com.realdolmen.candyshop.util.DateUtils;
 
+import javax.inject.Named;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,8 +10,18 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "find all people", query = "select p from Person p order by p.lastName, p.firstName")
+@NamedQueries({
+        @NamedQuery(name = "findPersonById", query = "select p from Person p where p.id = :id"),
+        @NamedQuery(name = "findAllPeople", query = "select p from Person p order by p.lastName, p.firstName"),
+        @NamedQuery(name = "countAllPeople", query = "select count(p) from Person p")
+})
+
 public class Person extends Tracked {
+
+    public static final String FIND_PERSON_BY_ID = "findPersonById";
+    public static final String FIND_ALL_PEOPLE = "findAllPeople";
+    public static final String COUNT_ALL_PEOPLE = "countAllPeople";
+
     @Id
     @GeneratedValue
     private Long id;
